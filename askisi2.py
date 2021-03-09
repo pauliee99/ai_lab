@@ -1,11 +1,4 @@
-f = open("tutorial.token", "r")
-content = f.read()
-content_list = content.split(" ")
-newlist = []
+words=['fsafsdf', 'grfdDgrd', 'GVFDSGRDS', 'fds']
 
-for x in content_list:
-  if x.count>=5 & x.islower():
-    newlist.append(x)
-
-print(newlist)
-f.close()
+new_list = [i for i in range(len(words)) for i in range(len(words[i])) if words[i].islower() and len(words[i])>5] 
+print (new_list)
