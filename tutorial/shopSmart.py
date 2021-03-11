@@ -30,6 +30,11 @@ def shopSmart(orderList, fruitShops):
         fruitShops: List of FruitShops
     """
     "*** YOUR CODE HERE ***"
+
+    sum=0
+    for key in fruitShops:
+        print (fruitShops, "->")
+
     return None
 
 
@@ -41,6 +46,7 @@ if __name__ == '__main__':
     dir2 = {'apples': 1.0, 'oranges': 5.0}
     shop2 = shop.FruitShop('shop2', dir2)
     shops = [shop1, shop2]
+    #print("For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName())
     print("For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName())
     orders = [('apples', 3.0)]
-    print("For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName())
+    #print("For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName())
