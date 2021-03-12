@@ -33,7 +33,7 @@ def shopSmart(orderList, fruitShops):
     min=0
     #fruitShops.index(0)
     tmp=0
-    print (shop.FruitShop)
+    shop.FruitShop
     for key in fruitShops:
         min = key
         if (tmp<key.getPriceOfOrder(orderList)):
