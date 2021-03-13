@@ -30,21 +30,15 @@ def shopSmart(orderList, fruitShops):
         fruitShops: List of FruitShops
     """
     "*** YOUR CODE HERE ***"
-    min=0
-    #fruitShops.index(0)
-    tmp=0
-    shop.FruitShop
+    tmp=[]
     for key in fruitShops:
-        min = key
-        if (tmp<key.getPriceOfOrder(orderList)):
-            tmp=key.getPriceOfOrder(orderList)
-            min=key
+        tmp.append(key.getPriceOfOrder(orderList))
 
-        # if (fruitShops.index(key)>0 and key.getPriceOfOrder(fruitShops.index(key)) < key.getPriceOfOrder(fruitShops.index(key)-1)):
-        #     min = key.getPriceOfOrder(orderList)
-        # print (fruitShops.index(key)-1)
-        #if min < key.getPriceOfOrder(orderList):
-            #return key
+    smallest = min(tmp)
+
+    for key in fruitShops:
+        if key.getPriceOfOrder(orderList) == smallest:
+            return key
 
     return min
 
@@ -57,7 +51,6 @@ if __name__ == '__main__':
     dir2 = {'apples': 1.0, 'oranges': 5.0}
     shop2 = shop.FruitShop('shop2', dir2)
     shops = [shop1, shop2]
-    #print("For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName())
     print("For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName())
     orders = [('apples', 3.0)]
-    #print("For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName())
+    print("For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName())
