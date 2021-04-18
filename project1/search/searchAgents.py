@@ -295,7 +295,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        return self.startingPosition
+        return (self.startingPosition, [])
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -303,13 +303,15 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        visited_corners = []
-        for i in self.corners:
-            visited_corners.append(i)
-
-        if len(visited_corners) >= len(self.corners):
-            return state
-        util.raiseNotDefined()
+        currentNode = state[0]
+        Visited_Corners = state[1]
+        if currentNode in self.corners:
+            if currentNode not in Visited_Corners:
+                Visited_Corners.append(currentNode)
+            if len(Visited_Corners)==4:
+                return True
+        else:
+            return False 
 
     def getSuccessors(self, state):
         """
@@ -331,13 +333,18 @@ class CornersProblem(search.SearchProblem):
             #   nextx, nexty = int(x + dx), int(y + dy)
             #   hitsWall = self.walls[nextx][nexty]
             "*** YOUR CODE HERE ***"
-            x,y = currentPosition
+            x,y = state[0][0], state[0][1]
+            visited_corners = state[1]
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
+            next_node = (nextx, nexty)
             hitsWall = self.walls[nextx][nexty]
-            if action==hitsWall:
-                continue
-            successors.append(action)
+            if not hitsWall:
+                if next_node in self.corners:
+                    if next_node not in list(visited_corners) :
+                        list(visited_corners) .append( next_node )
+                successor = ((next_node, list(visited_corners) ), action, 1)
+                successors.append(successor)
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
