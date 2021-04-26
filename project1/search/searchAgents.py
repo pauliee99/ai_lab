@@ -381,27 +381,19 @@ def cornersHeuristic(state, problem):
     "*** YOUR CODE HERE ***"
     if problem.isGoalState(state):
         return 0
-    coordinates = state[0]
-    visited_corners = state[1]
-    unvisited_corners = []
-
+    position, visited_corners = state
     unvisited_corners=list(corners)
 
-    heuristicValue = 0
-        
     while len(unvisited_corners) != 0: # While not empty
-        manhattan_distances = []
-        # Get manhattan distance to every corner
-        for each_corner in unvisited_corners:
-            get_manhattan = util.manhattanDistance(coordinates, each_corner)
-            manhattan_corner = (get_manhattan, each_corner)
-            manhattan_distances.append(manhattan_corner)
-        minimum, the_corner = min(manhattan_distances)
-        coordinates = the_corner
-        heuristicValue += minimum
-        unvisited_corners.remove(the_corner)
-            
-    return heuristicValue
+        distances = []
+        # iterate unvisited corners
+        for i in unvisited_corners:
+            # calculate the manhattan distance from the curretn position to the target corner
+            distances.append(util.manhattanDistance(position, i))
+            # remove the visted corner from the unvisited corners
+            unvisited_corners.remove(i)
+    
+    return max(distances)
     #return 0 # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
@@ -506,7 +498,10 @@ def foodHeuristic(state, problem):
         # mazeDistance(point1, point2, gameState) line:582
         # gets the distance between current position and food
         distances.append(mazeDistance(position,i,problem.startingGameState))
+        #distances.append(util.manhattanDistance(position, i))
 
+    #print (distances)
+    #print (max(distances))
     return max(distances)
     
 class ClosestDotSearchAgent(SearchAgent):
