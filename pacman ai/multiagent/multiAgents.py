@@ -111,6 +111,18 @@ class MinimaxAgent(MultiAgentSearchAgent):
     Your minimax agent (question 2)
     """
 
+    def max_value(gameState):
+        v=0
+        for i in gameState:
+            v=max(v, min_value(i))
+        return v
+
+    def min_value(gameState):
+        v=0
+        for i in gameState:
+            v=max(v, max_value(i))
+        return v
+
     def getAction(self, gameState):
         """
         Returns the minimax action from the current gameState using self.depth
@@ -135,6 +147,9 @@ class MinimaxAgent(MultiAgentSearchAgent):
         Returns whether or not the game state is a losing state
         """
         "*** YOUR CODE HERE ***"
+        if gameState.isLose() or gamestate.isWin():
+            return 0
+        print (gameState.getLegalActions(0))
         util.raiseNotDefined()
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
