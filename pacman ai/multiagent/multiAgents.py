@@ -111,17 +111,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
     Your minimax agent (question 2)
     """
 
-    def max_value(gameState):
-        v=0
-        for i in gameState:
-            v=max(v, min_value(i))
-        return v
-
-    def min_value(gameState):
-        v=0
-        for i in gameState:
-            v=max(v, max_value(i))
-        return v
+    
 
     def getAction(self, gameState):
         """
@@ -147,10 +137,44 @@ class MinimaxAgent(MultiAgentSearchAgent):
         Returns whether or not the game state is a losing state
         """
         "*** YOUR CODE HERE ***"
-        if gameState.isLose() or gamestate.isWin():
-            return 0
-        print (gameState.getLegalActions(0))
-        util.raiseNotDefined()
+        def minimaxSearch(self, gameState, agentIndex, depth):
+            if depth == 0 or gameState.isLose() or gameState.isWin():
+                ret = self.evaluationFunction(gameState), Directions.STOP
+            elif agentIndex == 0:
+                ret = self.maximizer(gameState, agentIndex, depth)
+            else:
+                ret = self.minimizer(gameState, agentIndex, depth)
+            return ret
+
+        def minimizer(self, gameState, agentIndex, depth):
+            actions = gameState.getLegalActions(agentIndex)
+            if agentIndex == gameState.getNumAgents() - 1:
+                next_agent, next_depth = 0, depth - 1
+            else:
+                next_agent, next_depth = agentIndex + 1, depth
+            min_score = 1e9
+            min_action = Directions.STOP
+            for action in actions:
+                successor_game_state = gameState.generateSuccessor(agentIndex, action)
+                new_score = self.minimaxSearch(successor_game_state, next_agent, next_depth)[0]
+                if new_score < min_score:
+                    min_score, min_action = new_score, action
+            return min_score, min_action
+
+        def maximizer(self, gameState, agentIndex, depth):
+            actions = gameState.getLegalActions(agentIndex)
+            if agentIndex == gameState.getNumAgents() - 1:
+                next_agent, next_depth = 0, depth - 1
+            else:
+                next_agent, next_depth = agentIndex + 1, depth
+            max_score = -1e9
+            max_action = Directions.STOP
+            for action in actions:
+                successor_game_state = gameState.generateSuccessor(agentIndex, action)
+                new_score = self.minimaxSearch(successor_game_state, next_agent, next_depth)[0]
+                if new_score > max_score:
+                    max_score, max_action = new_score, action
+            return max_score, max_action
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
