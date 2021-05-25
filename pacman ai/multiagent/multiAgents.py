@@ -159,7 +159,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
         for action in actions:
             succ = gameState.generateSuccessor(depth % gameState.getNumAgents(), action)
             res = self.value(succ, depth+1)
-            #print "res value from minFunc: ", res
             if res[1] < min_val[1]:
                 min_val = (action, res[1])
         return min_val
@@ -173,7 +172,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
         for action in actions:
             succ = gameState.generateSuccessor(0, action)
             res = self.value(succ, depth+1)
-            print ("res value from maxFunc: "), res
             if res[1] > max_val[1]:
                 max_val = (action, res[1])
         return max_val
