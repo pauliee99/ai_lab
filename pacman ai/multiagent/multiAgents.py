@@ -263,21 +263,24 @@ def betterEvaluationFunction(currentGameState):
     DESCRIPTION: <write something here so we know what you did>
     """
     "*** YOUR CODE HERE ***"
-    points = 0
-    counter = 0
+    # points = 0
+    # counter = 0
+    # if currentGameState.isWin():
+    #     counter += 1
+    # if counter == 1:
+    #     points += 1
+    # if counter == 5:
+    #     points += 1
+    # if counter == 5:
+    #     points += 2
+    # if currentGameState.getScore == 500:
+    #     points += 1
+    # if currentGameState.getScore == 1000:
+    #     points += 2
+    # return points
+    points = currentGameState.getScore()
     if currentGameState.isWin():
-        counter += 1
-    if counter == 1:
         points += 1
-    if counter == 5:
-        points += 1
-    if counter == 5:
-        points += 2
-    if currentGameState.getScore == 500:
-        points += 1
-    if currentGameState.getScore == 1000:
-        points += 2
-    return points
 
 
 # Abbreviation
