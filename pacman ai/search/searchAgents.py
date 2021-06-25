@@ -495,13 +495,8 @@ def foodHeuristic(state, problem):
 
     # iterates food positions list
     for i in foodGrid.asList():
-        # mazeDistance(point1, point2, gameState) line:582
-        # gets the distance between current position and food
         distances.append(mazeDistance(position,i,problem.startingGameState))
-        #distances.append(util.manhattanDistance(position, i))
 
-    #print (distances)
-    #print (max(distances))
     return max(distances)
     
 class ClosestDotSearchAgent(SearchAgent):
